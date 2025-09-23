@@ -31,7 +31,7 @@ export class NotificationProcessor extends WorkerHost {
   ) {
     switch (job.name) {
       case 'email':
-        return this.sendEmail(job.data);
+        return await this.sendEmail(job.data);
       default:
         throw new Error(`Unknown job name: ${job.name}`);
     }

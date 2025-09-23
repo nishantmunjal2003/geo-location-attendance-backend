@@ -144,6 +144,14 @@ export class AuthService {
     let user = await this.usersService.findOne({ email });
 
     if (!user) {
+      const allowedDomains = ['gkv.ac.in', 'muj.manipal.edu'];
+      const emailDomain = email.split('@')[1];
+
+      if (!allowedDomains.includes(emailDomain)) {
+        throw new BadRequestException(
+          `Signup is only allowed for ${allowedDomains.join(' or ')} domains.`,
+        );
+      }
       const role = /^[a-zA-Z]+@gkv\.ac\.in$/.test(email)
         ? 'teacher'
         : 'student';

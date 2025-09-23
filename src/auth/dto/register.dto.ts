@@ -11,7 +11,10 @@ export class RegisterDto {
    * E-mail
    * @example 196301078@gkv.ac.in
    */
-  @IsEmail()
+  @IsEmail(
+    { host_whitelist: ['gkv.ac.in', 'muj.manipal.edu'] },
+    { message: 'Please use GKV or Manipal E-mail' },
+  )
   @Transform(({ value }) => value?.trim().toLowerCase())
   email: string;
 

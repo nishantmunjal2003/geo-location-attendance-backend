@@ -42,7 +42,10 @@ export class CoursesProcessor extends WorkerHost {
     const oldUsers = [];
     for (let i = 1; i <= length; i++) {
       const email = worksheet[`A${i}`].v.replace(/\s/g, '').toLowerCase();
-      if (worksheet[`A${i}`] && /^\d{8,9}@gkv\.ac\.in$/.test(email)) {
+      if (
+        worksheet[`A${i}`] &&
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
+      ) {
         const name = worksheet[`B${i}`]?.v;
         const parentEmail = worksheet[`C${i}`]?.v;
         const parentPhone = worksheet[`D${i}`]?.v;
