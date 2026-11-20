@@ -1,6 +1,8 @@
-FROM node:lts-alpine AS development
+FROM node:22-bookworm-slim AS development
 
 WORKDIR /usr/src/app
+
+ENV MONGOMS_DISABLE_POSTINSTALL=1
 
 COPY package*.json ./
 
@@ -10,10 +12,11 @@ COPY . .
 
 RUN npm run build
 
-FROM node:lts-alpine AS production
+FROM node:22-bookworm-slim AS production
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
+ENV MONGOMS_DISABLE_POSTINSTALL=1
 
 WORKDIR /usr/src/app
 
