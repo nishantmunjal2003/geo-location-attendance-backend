@@ -28,4 +28,7 @@ COPY . .
 
 COPY --from=development /usr/src/app/dist ./dist
 
+EXPOSE 8080
+EXPOSE 5000
+
 CMD ["node", "dist/main"]
